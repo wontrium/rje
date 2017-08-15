@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+
+	<delete model="ir.actions.report.xml" search="[('id', '=', ref('purchase.action_report_purchase_order'))]" />
+	<delete model="ir.actions.report.xml" search="[('id', '=', ref('purchase.report_purchase_quotation'))]" />
+
+	# TEST
+	<report string="TEST"
+	    model="purchase.order"
+	    auto="True"
+	    name="rje.test"
+	    rml="jrxml_reports/custom_reports/test.jrxml"
+	    id="rje_test"
+	    menu="True"
+	    header="False"
+	    />
+	<record id="rje_test" model="ir.actions.report.xml">
+	    <field name="jasper_report">True</field>
+	    <field name="jasper_output">pdf</field>
+	</record>
+	# Purchase Order
+    <report string="Purchase Order"
+        model="purchase.order"
+        auto="True"
+        name="rje.purchase.order"
+        rml="jrxml_reports/custom_reports/purchase_order.jrxml"
+        id="rje_purchase_order"
+        menu="True"
+        header="False"
+        />
+    <record id="rje_purchase_order" model="ir.actions.report.xml">
+        <field name="jasper_report">True</field>
+        <field name="jasper_output">pdf</field>
+    </record>
+
+</data>
+</openerp>
