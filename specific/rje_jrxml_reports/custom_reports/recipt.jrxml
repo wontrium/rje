@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="recipt" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="recipt" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<property name="OPENERP_RELATIONS" value=""/>
+	<property name="OPENERP_RELATIONS" value="[&quot;account_voucher&quot;]"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<queryString language="xPath">
+		<![CDATA[/data/record]]>
+	</queryString>
+	<field name="price_subtotal" class="java.lang.Float">
+		<fieldDescription><![CDATA[price_subtotal]]></fieldDescription>
+	</field>
+	<field name="amount" class="java.lang.Float">
+		<fieldDescription><![CDATA[amount]]></fieldDescription>
+	</field>
+	<field name="date_original" class="java.util.Date">
+		<fieldDescription><![CDATA[date_original]]></fieldDescription>
+	</field>
 	<background>
 		<band height="802" splitType="Stretch">
 			<rectangle>
@@ -156,6 +168,11 @@
 				</textElement>
 				<text><![CDATA[416 หมู่ 2 ถ.บางพลี-ตำหรุ ต.เเพรกษาใหม่ อ.เมือง จ.สมุทรปราการ 10280]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="428" y="99" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{date_original}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -175,21 +192,21 @@
 				<text><![CDATA[Item]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="47" y="0" width="114" height="20"/>
+				<reportElement x="47" y="0" width="147" height="20"/>
 				<textElement textAlignment="Center">
 					<font pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<text><![CDATA[ใบส่งสินค้าเลขที่]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="47" y="18" width="114" height="20"/>
+				<reportElement x="47" y="18" width="148" height="20"/>
 				<textElement textAlignment="Center">
 					<font pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
 				<text><![CDATA[Invoice No.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="159" y="0" width="100" height="20"/>
+				<reportElement x="195" y="0" width="64" height="20"/>
 				<textElement textAlignment="Center">
 					<font pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
@@ -223,11 +240,8 @@
 				</textElement>
 				<text><![CDATA[Amount]]></text>
 			</staticText>
-			<line>
-				<reportElement x="46" y="0" width="1" height="38"/>
-			</line>
 			<staticText>
-				<reportElement x="161" y="18" width="100" height="20"/>
+				<reportElement x="195" y="18" width="66" height="20"/>
 				<textElement textAlignment="Center">
 					<font pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
 				</textElement>
@@ -247,16 +261,21 @@
 				</textElement>
 				<text><![CDATA[จำนวนเงิน]]></text>
 			</staticText>
-			<line>
-				<reportElement x="173" y="3" width="100" height="1"/>
-			</line>
-			<line>
-				<reportElement x="167" y="17" width="100" height="1"/>
-			</line>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="38" splitType="Stretch"/>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="1" y="0" width="46" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="172" y="0" width="94" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{price_subtotal}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
 	<columnFooter>
 		<band height="45" splitType="Stretch"/>
