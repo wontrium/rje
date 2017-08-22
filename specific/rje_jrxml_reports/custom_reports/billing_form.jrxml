@@ -2,8 +2,27 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="billing_form" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="840"/>
+	<property name="OPENERP_RELATIONS" value="[&quot;account_billing&quot;]"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<queryString language="xPath">
+		<![CDATA[/data/record]]>
+	</queryString>
+	<field name="partner_id" class="java.lang.String">
+		<fieldDescription><![CDATA[partner_id]]></fieldDescription>
+	</field>
+	<field name="date" class="java.util.Date">
+		<fieldDescription><![CDATA[date]]></fieldDescription>
+	</field>
+	<field name="date_original" class="java.lang.String">
+		<fieldDescription><![CDATA[date_original]]></fieldDescription>
+	</field>
+	<field name="amount_original" class="java.lang.Float">
+		<fieldDescription><![CDATA[amount_original]]></fieldDescription>
+	</field>
+	<field name="billing_amount" class="java.lang.Float">
+		<fieldDescription><![CDATA[billing_amount]]></fieldDescription>
+	</field>
 	<background>
 		<band height="802" splitType="Stretch">
 			<rectangle>
@@ -13,7 +32,7 @@
 				<reportElement x="1" y="476" width="446" height="42"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="295" y="545" width="260" height="47"/>
+				<reportElement x="298" y="551" width="260" height="47"/>
 			</rectangle>
 			<staticText>
 				<reportElement x="248" y="476" width="47" height="30"/>
@@ -139,6 +158,11 @@
 			<line>
 				<reportElement x="324" y="647" width="134" height="1"/>
 			</line>
+			<textField>
+				<reportElement x="296" y="486" width="113" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{billing_amount}]]></textFieldExpression>
+			</textField>
 		</band>
 	</background>
 	<pageHeader>
@@ -233,6 +257,18 @@
 				</textElement>
 				<text><![CDATA[ได้รับบิลไว้ตรวจสอบดังรายการต่อไปนี้ / Received the bills for checking as Item following.]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="76" y="98" width="230" height="20"/>
+				<textElement>
+					<font pdfFontName="Garuda.ttf" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{partner_id}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="358" y="102" width="149" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -324,7 +360,23 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="53" height="26"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="215" y="6" width="80" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{date_original}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="132" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{amount_original}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
 	<columnFooter>
 		<band height="45" splitType="Stretch"/>

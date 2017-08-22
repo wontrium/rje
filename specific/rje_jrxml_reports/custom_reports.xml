@@ -64,7 +64,7 @@
 					menu="True"
 					header="False"
 					/>
-				<record id="rje_receipt" model="ir.actions.report.xml">
+				<record id="rje_billing" model="ir.actions.report.xml">
 					<field name="jasper_report">True</field>
 					<field name="jasper_output">pdf</field>
 				</record>
